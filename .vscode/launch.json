@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "host Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/home/sergey/sites/youboost.loc": "${workspaceFolder}" // Замените "/var/www/youboost.loc" на путь к вашему проекту
+            },
+            "log": true
+        }
+    ]
+}

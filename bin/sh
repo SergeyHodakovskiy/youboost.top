@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Определяем корневую директорию
+ROOT_DIR="src"
+
+# Список директорий для создания
+DIRECTORIES=(
+  "$ROOT_DIR/Domain/User/Entity"
+  "$ROOT_DIR/Domain/User/Repository"
+  "$ROOT_DIR/Domain/User/Service"
+  "$ROOT_DIR/Domain/User/DataFixtures"
+  "$ROOT_DIR/Application/Security/DTO/Login"
+  "$ROOT_DIR/Application/Security/DTO/Register"
+  "$ROOT_DIR/Application/Security/Service"
+  "$ROOT_DIR/Application/Security/Strategy/Authentication"
+  "$ROOT_DIR/Application/Security/Strategy/Registration"
+  "$ROOT_DIR/Application/Form"
+  "$ROOT_DIR/Infrastructure/Controller/User"
+  "$ROOT_DIR/Infrastructure/Persistence/Doctrine/Migration"
+  "$ROOT_DIR/Infrastructure/Security"
+  "$ROOT_DIR/Shared/Entity/Trait"
+  "$ROOT_DIR/Shared/Util"
+  "$ROOT_DIR/Shared/Service"
+)
+
+# Создаем директории
+for dir in "${DIRECTORIES[@]}"; do
+  mkdir -p "$dir"
+  echo "Создана директория: $dir"
+done
+
+# Создаем пустой файл Kernel.php
+touch "$ROOT_DIR/Kernel.php"
+echo "Создан файл: $ROOT_DIR/Kernel.php"
+
+echo "Структура проекта успешно создана!"

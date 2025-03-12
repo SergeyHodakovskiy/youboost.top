@@ -1,0 +1,145 @@
+<header>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-md sticky top-0 z-50">
+        <div
+            class="navbar-start">
+            <!-- Hamburger for mobile -->
+            <div class="dropdown lg:hidden">
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                        <a href="{{ path('homepage') }}" class="text-base-content hover:text-primary">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-base-content/60 hover:text-primary">Link</a>
+                    </li>
+                    <li>
+                        <details>
+                            <summary class="text-base-content/60 hover:text-primary">Dropdown</summary>
+                            <ul class="p-2 bg-base-100">
+                                <li>
+                                    <a href="#" class="hover:bg-base-200">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:bg-base-200">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:bg-base-200">Something else</a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+            <!-- Logo -->
+            <a href="{{ path('homepage') }}" class="flex items-center space-x-2 text-xl font-semibold">
+                <svg width="50" height="50" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 120 L100 50 L150 120" stroke="red" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="90" y="110" width="20" height="70" fill="red" rx="5"/>
+                </svg>
+
+                <span>YouBoost</span>
+            </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <a href="{{ path('homepage') }}" class="text-base-content hover:text-primary">Home</a>
+                </li>
+                <li>
+                    <a href="#" class="text-base-content/60 hover:text-primary">Link</a>
+                </li>
+                <li>
+                    <details>
+                        <summary class="text-base-content/60 hover:text-primary">Dropdown</summary>
+                        <ul class="p-2 bg-base-100 w-48">
+                            <li>
+                                <a href="#" class="hover:bg-base-200">Action</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:bg-base-200">Another action</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:bg-base-200">Something else</a>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right Elements -->
+        <div class="navbar-end flex items-center gap-2">
+            {% include 'partials/lang.html.twig' %}
+            {% set user = app.user ?? null %}
+            <div
+                class="flex items-center gap-2">
+                {# login #}
+                {% if user is null %}
+                    <a href="{{ path('app_login') }}" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"/>
+                        </svg>
+                    </a>
+                    {# logout #}
+                {% elseif user.isUser() %}
+                    <a href="{{ path('app_logout') }}" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/>
+                        </svg>
+                    </a>
+                {% endif %}
+
+                <!-- Theme Toggle -->
+                <label class="swap swap-rotate">
+                    <input
+                    type="checkbox" data-toggle-theme="light,dark" data-act-class="active"/>
+                    <!-- Жёлтое солнце -->
+                    <svg class="swap-off size-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="m4.93 4.93 1.41 1.41"></path>
+                        <path d="m17.66 17.66 1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="m6.34 17.66-1.41 1.41"></path>
+                        <path d="m19.07 4.93-1.41 1.41"></path>
+                    </svg>
+
+                    <!-- Луна -->
+                    <svg class="swap-on size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </label>
+            </div>
+            <!-- Cog Icon -->
+            <a href="#" class="btn btn-ghost btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewbox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <!-- Envelope Icon -->
+            <a href="#" class="btn btn-ghost btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewbox="0 0 24 24" fill="currentColor">
+                    <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
+                    <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
+                </svg>
+            </a>
+            <!-- User Icon -->
+            {% if user is not null and user.isUser() %}
+                <a href="" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewbox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</header>

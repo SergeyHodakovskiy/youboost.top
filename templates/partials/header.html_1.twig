@@ -1,0 +1,64 @@
+<header>
+    <nav class="relative flex w-full items-center justify-between bg-white py-2 shadow-md dark:bg-neutral-800 lg:py-4">
+        <div
+            class="mx-auto flex w-full max-w-7xl items-center justify-between px-4">
+
+            <!-- Логотип -->
+            <a href="#" class="flex items-center text-neutral-900 dark:text-neutral-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+                <span class="ml-2 text-lg font-semibold">YouBoost</span>
+            </a>
+
+            <!-- Кнопка меню для мобильных -->
+            <button class="lg:hidden text-neutral-900 dark:text-neutral-200 focus:outline-none" id="mobile-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor">
+                    <path d="M3 6h18M3 12h18M3 18h18"></path>
+                </svg>
+            </button>
+
+            <!-- Навигация -->
+            <div class="hidden lg:flex flex-grow justify-center space-x-6" id="navbar">
+                <a href="#" class="text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">Dashboard</a>
+                <a href="#" class="text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">Team</a>
+                <a href="#" class="text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">Projects</a>
+            </div>
+
+            <!-- Иконки и переключатель темы -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </a>
+
+                <!-- Переключатель темы -->
+                <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full">
+                    <svg id="theme-toggle-light" class="hidden w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="m4.93 4.93 1.41 1.41"></path>
+                        <path d="m17.66 17.66 1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="m6.34 17.66-1.41 1.41"></path>
+                        <path d="m19.07 4.93-1.41 1.41"></path>
+                    </svg>
+
+                    <svg id="theme-toggle-dark" class="w-6 h-6 text-gray-500 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-neutral-800 shadow-md py-4">
+        <a href="#" class="block px-4 py-2 text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">Dashboard</a>
+        <a href="#" class="block px-4 py-2 text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">Team</a>
+        <a href="#" class="block px-4 py-2 text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white">Projects</a>
+    </div>
+</header>

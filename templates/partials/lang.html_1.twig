@@ -1,0 +1,74 @@
+<div class="relative ms-2" data-te-dropdown-ref>
+    <a class="flex items-center text-neutral-500 dark:text-neutral-300 hover:text-neutral-700 dark:hover:text-white transition duration-200" href="#" id="languageDropdown" role="button" data-te-dropdown-toggle-ref aria-expanded="false">
+        <span class="relative inline-block h-[14px] w-5 overflow-hidden mr-1">
+            <span class="inline-block h-[14px] w-5 content-[''] [background-position:-36px_-26px_!important] [background:url(https://tecdn.b-cdn.net/img/svg/flags.png)_no-repeat_-108px_-1976px]"></span>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewbox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+        </svg>
+    </a>
+    <ul class="absolute z-[1000] float-left hidden min-w-[10rem] list-none overflow-hidden rounded-lg border-none bg-white text-left text-base shadow-lg dark:bg-neutral-700" aria-labelledby="languageDropdown" data-te-dropdown-menu-ref>
+        {% set languages = [
+            {code: 'en', name: 'English', flag_pos: '-108px_-1976px'},
+            {code: 'pl', name: 'Polski', flag_pos: '-72px_-572px'},
+            {code: 'zh', name: '中文', flag_pos: '0px_-1196px'},
+            {code: 'ja', name: '日本語', flag_pos: '-36px_-910px'},
+            {code: 'de', name: 'Deutsch', flag_pos: '0px_-1430px'},
+            {code: 'fr', name: 'Français', flag_pos: '0px_-1742px'},
+            {code: 'es', name: 'Español', flag_pos: '-72px_-884px'},
+            {code: 'ru', name: 'Русский', flag_pos: '-72px_-702px'}
+        ] %}
+
+        {% for lang in languages %}
+            <li>
+                <a href="" class="language-switch block w-full whitespace-nowrap px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:text-white dark:hover:bg-neutral-600" data-locale="{{ lang.code }}">
+                    <span class="relative me-2 inline-block h-[14px] w-5 overflow-hidden">
+                        <span class="inline-block h-[14px] w-5 content-[''] [background:url(https://tecdn.b-cdn.net/img/svg/flags.png)_no-repeat] [background-position:{{ lang.flag_pos }}]"></span>
+                    </span>
+                    {{ lang.name }}
+                    {% if app.request.locale == lang.code %}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-4 w-4 ml-2 text-green-500" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    {% endif %}
+                </a>
+            </li>
+            {% if not loop.last %}
+                <li><hr class="my-2 border-neutral-100 dark:border-neutral-600"></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const languageSwitches = document.querySelectorAll('.language-switch');
+
+        languageSwitches.forEach(link => {
+            link.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const locale = link.dataset.locale;
+
+                try {
+                    const response = await fetch("/api/set-locale", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(
+                            {locale: locale}
+                        )
+                    });
+
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    console.error('Locale switch error:', error);
+                }
+            });
+        });
+    });
+</script>

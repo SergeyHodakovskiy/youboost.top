@@ -1,0 +1,91 @@
+<header class="bg-gray-800 text-white shadow-md">
+    <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Логотип -->
+        <a href="{{ path('home') }}" class="flex items-center space-x-2 text-xl font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="youtube" class="lucide lucide-youtube logo-icon">
+                <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+                <path d="m10 15 5-3-5-3z"></path>
+            </svg>
+            <span>YouBoost</span>
+        </a>
+
+        <!-- Десктопное меню -->
+        <nav class="hidden md:flex items-center space-x-6">
+            {% for item in menu_items %}
+                <a href="{{ path(item.route) }}" class="hover:text-red-400 transition duration-200">
+                    <i class="{{ item.icon }} mr-2"></i>
+                    {{ item.title }}
+                </a>
+            {% endfor %}
+        </nav>
+
+        <!-- Действия (тема, язык, вход) -->
+        <div
+            class="flex items-center space-x-4">
+            <!-- Переключение темы -->
+            <button type="button" class="hs-dark-mode-active:hidden block hs-dark-mode font-medium text-gray-800 rounded-full hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" data-hs-theme-click-value="dark">
+                <span class="group inline-flex shrink-0 justify-center items-center size-9">
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </span>
+            </button>
+
+            <!-- Выбор языка -->
+            <select id="language-select" class="bg-gray-900 border-none text-white">
+                <option value="ru" {% if app.request.locale == 'ru' %} selected {% endif %}>🇷🇺 RU</option>
+                <option value="en" {% if app.request.locale == 'en' %} selected {% endif %}>🇬🇧 EN</option>
+            </select>
+
+            <!-- Вход -->
+            <a href="{{ path('login') }}" class="bg-red-500 px-4 py-2 rounded-md text-white hover:bg-red-600 transition">
+                Вход
+            </a>
+
+            <!-- Бургер для мобильных -->
+            <button id="menu-toggle" class="md:hidden p-2 rounded-md hover:bg-gray-800">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <nav id="mobile-menu" class="fixed inset-0 bg-gray-900 z-50 hidden md:hidden">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center mb-6">
+                <a href="{{ path('home') }}" class="flex items-center space-x-2 text-xl font-semibold">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8">
+                    <span>YouBoost</span>
+                </a>
+                <button id="menu-close" class="text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="flex flex-col space-y-4">
+                {% for item in menu_items %}
+                    <li>
+                        <a href="{{ path(item.route) }}" class="block text-lg hover:text-red-400 transition flex items-center">
+                            <i class="{{ item.icon }} mr-3"></i>
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="mt-6 space-y-4">
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-800">
+                        <i id="theme-icon-mobile" class="fas fa-moon"></i>
+                    </button>
+                    <select id="language-select-mobile" class="bg-gray-800 border-none text-white w-full py-2 rounded-md">
+                        <option value="ru" {% if app.request.locale == 'ru' %} selected {% endif %}>🇷🇺 RU</option>
+                        <option value="en" {% if app.request.locale == 'en' %} selected {% endif %}>🇬🇧 EN</option>
+                    </select>
+                </div>
+                <a href="{{ path('login') }}" class="block w-full bg-red-500 px-4 py-3 rounded-md text-white text-center hover:bg-red-600 transition">
+                    Вход
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

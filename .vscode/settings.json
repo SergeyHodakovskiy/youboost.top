@@ -1,0 +1,46 @@
+{
+    "php.validate.executablePath": "/usr/bin/php",
+    "php.executablePath": "/usr/bin/php",
+    "phpunit.executablePath": "/home/sergey/sites/youboost.top/vendor/bin/phpunit",
+    "editor.formatOnSave": true,
+    "phpcs.executablesFolder": "~/.composer/vendor/bin",
+    "yaml.completion": false,
+    "yaml.format.enable": true,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+    },
+    "[twig]": {
+        "editor.defaultFormatter": "mblode.twig-language-2", //esbenp.prettier-vscode
+    },
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": ".*\\.php$", // Срабатывает для всех PHP-файлов
+                "cmd": "./vendor/bin/pint --dirty && php bin/console cache:clear --env=dev" // Пример команды для Symfony
+            },
+            {
+                "match": ".*\\.twig$", // Срабатывает для Twig-шаблонов
+                "cmd": "php bin/console lint:twig"
+            },
+            {
+                "match": ".*\\.yaml$", // Срабатывает для YAML-файлов
+                "cmd": "php bin/console lint:yaml config/" // Проверяет YAML в папке config
+            }
+        ]
+    },
+    "fiveServer.host": "127.0.0.1",
+    // "twig-language-2.format.enabled": true,
+    // "twig-language-2.format.wrap_line_length": 0, // 0 отключает перенос строк
+    // "twig-language-2.format.indent_size": 2, // или другое значение
+}

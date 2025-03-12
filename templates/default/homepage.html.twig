@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About YouBoost
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <main>
+        <!-- Hero Section -->
+        <section class="hero bg-red-700 text-white min-h-[50vh] flex items-center justify-center">
+            <div class="hero-content text-center">
+                <div class="max-w-4xl">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Расширьте свою аудиторию на YouTube</h1>
+                    <p class="text-lg md:text-xl mb-6">Станьте частью нашей платформы для обмена ссылками и подписками</p>
+                    <a href="{{ path('app_register') }}" class="btn btn-primary">Присоединиться</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="py-16 bg-base-200">
+            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-lg font-bold justify-center">🧑‍🤝‍🧑 Активное сообщество</h3>
+                            <p class="text-base-content/70">Тысячи активных пользователей готовы к взаимному продвижению</p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-lg font-bold justify-center">🔒 Безопасность</h3>
+                            <p class="text-base-content/70">Защита от ботов и накруток, только реальные пользователи</p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-lg font-bold justify-center">📈 Быстрый рост</h3>
+                            <p class="text-base-content/70">Эффективные инструменты для увеличения просмотров и подписчиков</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
