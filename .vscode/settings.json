@@ -5,7 +5,7 @@
     "editor.formatOnSave": true,
     "phpcs.executablesFolder": "~/.composer/vendor/bin",
     "yaml.completion": false,
-    "yaml.format.enable": true,
+    "yaml.format.enable": false,
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml",
         "editor.insertSpaces": true,
@@ -43,4 +43,7 @@
     // "twig-language-2.format.enabled": true,
     // "twig-language-2.format.wrap_line_length": 0, // 0 отключает перенос строк
     // "twig-language-2.format.indent_size": 2, // или другое значение
+    // "files.exclude": {
+    //     "**/vendor": true
+    // }
 }

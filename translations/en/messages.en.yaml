@@ -1,0 +1,15 @@
+menu:
+   home: 'Home'
+   profile: 'Profile'
+   admin: 'Admin Panel'
+   how_it_works: 'How it works'
+   about: 'About'
+   contact: 'Contact'
+   logout: 'Logout'
+   login: 'Login'
+auth:
+   error:
+        missing_email: "Enter email."
+        missing_password: "Enter password."
+        user_not_found: "User not found."
+        invalid_password: "Invalid password."

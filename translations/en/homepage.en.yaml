@@ -1,0 +1,9 @@
+title: "Welcome to our website"
+description: "This is the best Symfony demo application."
+message: "This is the best Symfony demo application."
+
+footer:
+  terms: "Terms of service"
+  privacy: "Privacy policy"
+  contact: "Contact"
+  rights: "All rights reserved."

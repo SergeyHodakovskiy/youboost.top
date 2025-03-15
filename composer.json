@@ -11,7 +11,7 @@
         "doctrine/doctrine-bundle": "^2.13.2",
         "doctrine/doctrine-migrations-bundle": "^3.4.1",
         "doctrine/orm": "^3.3.2",
-        "google/apiclient": "*",
+        "google/apiclient": "^2.18",
         "pentatrion/vite-bundle": "^8.0.2",
         "symfony/asset-mapper": "7.2.*",
         "symfony/console": "7.2.*",

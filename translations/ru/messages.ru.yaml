@@ -1,0 +1,15 @@
+menu:
+   home: 'Главная'
+   profile: 'Профиль'
+   admin: 'Админка'
+   how_it_works: 'Как это работает'
+   about: 'О нас'
+   contact: 'Контакты'
+   logout: 'Выход'
+   login: 'Логин'
+auth:
+    error:
+        missing_email: "Введите email."
+        missing_password: "Введите пароль."
+        user_not_found: "Пользователь не найден."
+        invalid_password: "Неверный пароль."

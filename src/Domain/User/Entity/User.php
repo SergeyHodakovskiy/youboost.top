@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private array $preferences = ['language' => 'en', 'timezone' => 'UTC', 'theme' => 'light'];
 
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $authProviders = null; // Для Google, Apple, Telegram
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,6 +120,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPreferences(array $preferences): void
     {
         $this->preferences = $preferences;
+    }
+
+    public function getAuthProviders(): ?array
+    {
+        return $this->authProviders;
+    }
+
+    public function setAuthProviders(?array $authProviders): static
+    {
+        $this->authProviders = $authProviders;
+
+        return $this;
+    }
+
+    public function hasAuthProvider(string $provider): bool
+    {
+        return array_key_exists($provider, $this->authProviders ?? []);
+    }
+
+    public function addAuthProvider(string $provider, array $data = []): void
+    {
+        if ($this->authProviders === null) {
+            $this->authProviders = [];
+        }
+        $this->authProviders[$provider] = $data;
+    }
+    public function isUser(): bool
+    {
+        return in_array('ROLE_USER', $this->roles, true);
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles, true);
     }
 
     /**

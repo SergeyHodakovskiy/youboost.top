@@ -4,13 +4,19 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+   available_locales: ['ru', 'en']
+   locale: 'en'
+   # This parameter defines the codes of the locales (languages) enabled in the application
+   # app_locales: ar|en|fr|de|es|cs|nl|ru|uk|ro|pt_BR|pl|it|ja|id|ca|sl|hr|zh_CN|bg|tr|lt|bs|sr_Cyrl|sr_Latn
+   app.notifications.email_sender: hodakovskiy@gmail.com
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
+        bind:
+         $twig: '@twig'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -19,31 +25,48 @@ services:
             - "../src/DependencyInjection/"
             - "../src/Entity/"
             - "../src/Kernel.php"
-
+    App\Infrastructure\Translation\MultiDomainTranslator:
+      decorates: 'translator.default'
+      arguments:
+         $translator: '@App\Infrastructure\Translation\MultiDomainTranslator.inner'
+         $domains: ['messages', ''] # Ваши домены , "errors", "notifications"
+      public: false
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     # App\Security\Service\AuthenticationService:
     #     argments:
     #         $sturategies: !tagged_iterator app.authentication_strategy
 
-    App\Application\Security\Service\AuthenticationService:
-        arguments:
-            $strategies:
-                - '@App\Application\Security\Strategy\Authentication\EmailPasswordAuthenticationStrategy'
-                - '@App\Application\Security\Strategy\Authentication\GoogleAuthenticationStrategy'
-
     # App\Application\Security\Service\AuthenticationService:
     #     arguments:
-    #         $strategies: !tagged_iterator app.authentication_strategy
+    #         $strategies:
+    #             - '@App\Application\Security\Strategy\Authentication\EmailPasswordAuthenticationStrategy'
+    #             - '@App\Application\Security\Strategy\Authentication\GoogleAuthenticationStrategy'
 
-    # App\Application\Security\Strategy\Authentication\EmailPasswordAuthenticationStrategy:
-    #     tags: ["app.authentication_strategy"]
+    App\Application\Security\Service\AuthenticationService:
+        arguments:
+            $strategies: !tagged_iterator app.authentication_strategy
 
-    # App\Application\Security\Service\RegistrationService:
-    #     arguments:
-    #         $strategies: !tagged_iterator app.registration_strategy
+    App\Application\Security\Strategy\Authentication\EmailPasswordAuthenticationStrategy:
+        tags: ["app.authentication_strategy"]
+
+    App\Application\Security\Service\RegistrationService:
+        arguments:
+            $strategies: !tagged_iterator app.registration_strategy
     #         $observers: !tagged_iterator app.registration_observer
+    App\Infrastructure\Security\GoogleAuthService:
+        arguments:
+            $googleClientId: '%env(GOOGLE_CLIENT_ID)%'
 
+    App\Application\Security\Strategy\Authentication\GoogleAuthenticationStrategy:
+        arguments:
+            $userRepository: '@App\Domain\User\Repository\UserRepository'
+            $googleAuthService: '@App\Infrastructure\Security\GoogleAuthService'
+        tags:
+            - { name: 'app.authentication_strategy' }
+
+
+            
     # App\Application\Security\Strategy\Registration\EmailPasswordRegistrationStrategy:
     #     tags: ["app.registration_strategy"]
 

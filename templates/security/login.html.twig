@@ -10,19 +10,20 @@
         {% if error %}
             <div class="alert alert-error mb-5">{{ error }}</div>
         {% endif %}
-        <form method="POST" class="w-full max-w-sm">
+        <form method="POST" action="{{ path('app_login_provider', {'provider': provider}) }}" class="w-full max-w-sm">
             <div class="mb-6">
                 <label for="email" class="block text-sm/6 font-semibold">Email address</label>
-                <input type="email" id="email" name="_username" class="mt-2 appearance-none bg-white rounded-md block w-full px-3 h-10 shadow-xs sm:text-sm focus:outline-hidden placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200" required value="{{ last_username ?? '' }}">
+                <input type="email" id="email" name="email" class="mt-2 appearance-none bg-white rounded-md block w-full px-3 h-10 shadow-xs sm:text-sm focus:outline-hidden placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200" required value="{{ last_username ?? '' }}">
             </div>
             <div class="mb-6">
                 <label for="password" class="block text-sm/6 font-semibold">Password</label>
-                <input type="password" id="password" name="_password" class="mt-2 appearance-none bg-white rounded-md block w-full px-3 h-10 shadow-xs sm:text-sm focus:outline-hidden placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200" required>
+                <input type="password" id="password" name="password" class="mt-2 appearance-none bg-white rounded-md block w-full px-3 h-10 shadow-xs sm:text-sm focus:outline-hidden placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200" required>
             </div>
             <button type="submit" class="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full">
                 <span>Sign in to account</span>
             </button>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
             <p class="mt-8 text-center">
                 <a class="text-sm hover:underline" href="/password/reset">Forgot password?</a>
             </p>

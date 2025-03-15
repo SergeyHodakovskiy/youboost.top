@@ -1,38 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Security\Service;
 
-use App\Domain\User\Entity\User;
-use App\Application\Security\Provider;
+use App\Application\Security\Strategy\Authentication\AuthenticationStrategyInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Application\Security\Strategy\AuthenticationStrategyInterface;
+use App\Domain\User\Entity\User;
+use RuntimeException;
+use App\Application\Security\AuthProvider;
 
 class AuthenticationService
 {
-    /** @var iterable|AuthenticationStrategyInterface[] */
-    private iterable $strategies;
+    /** @param iterable<AuthenticationStrategyInterface> $strategies */
+    public function __construct(
+        private readonly iterable $strategies
+    ) {}
 
-    private Provider $provider;
-
-    public function __construct(iterable $strategies)
-    {
-        $this->strategies = $strategies;
-    }
-
-    public function authenticate(Request $request): ?User
+    public function authenticate(Request $request, AuthProvider $provider): ?User
     {
         foreach ($this->strategies as $strategy) {
-            if ($strategy->supports($request)) {
-
+            if ($strategy->supports($provider)) {
                 return $strategy->authenticate($request);
             }
         }
 
-        return null; // Или можно бросить исключение, если ни одна стратегия не подошла
-    }
-
-    public function setProvider(Provider $provider): void
-    {
-        $this->provider = $provider;
+        throw new RuntimeException('No authentication strategy found for: ' . $provider);
     }
 }
